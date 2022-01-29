@@ -8,7 +8,7 @@ export function absencesLoaded(
   page: number,
   count: number,
   absences: IAbsence[],
-  filter: IFilter
+  filter: Filter
 ) {
   return {
     type: ABSENCES_LOADED,
@@ -16,7 +16,7 @@ export function absencesLoaded(
   };
 }
 
-export function absencesError(page: number, filter: IFilter, error: Error) {
+export function absencesError(page: number, filter: Filter, error: Error) {
   return {
     type: ABSENCES_ERROR,
     data: { page, filter, error },
