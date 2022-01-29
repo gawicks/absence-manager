@@ -9,6 +9,7 @@ const columns: GridColDef[] = [
     headerName: "Member name",
     filterable: false,
     width: 150,
+    sortable: false,
   },
   {
     field: "type",
@@ -16,30 +17,35 @@ const columns: GridColDef[] = [
     type: "singleSelect",
     valueOptions: ["sickness", "vacation", "other"],
     width: 150,
+    sortable: false,
   },
   {
     field: "period",
     headerName: "Period",
     type: "date",
     width: 300,
+    sortable: false,
   },
   {
     field: "memberNote",
     headerName: "Member note",
     filterable: false,
     width: 150,
+    sortable: false,
   },
   {
     field: "status",
     headerName: "Status",
     filterable: false,
     width: 150,
+    sortable: false,
   },
   {
     field: "admitterNote",
     headerName: "Admitter note",
     filterable: false,
     width: 150,
+    sortable: false,
   },
 ];
 
@@ -55,5 +61,7 @@ export default function App() {
     fetchAbsences();
   }, []);
 
-  return <DataGrid rows={absences} columns={columns} />;
+  return (
+    <DataGrid style={{ height: "500px" }} rows={absences} columns={columns} />
+  );
 }
