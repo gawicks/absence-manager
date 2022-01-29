@@ -1,7 +1,16 @@
 import { AnyAction } from "redux";
 import { ABSENCES_ERROR, ABSENCES_LOADED, FETCH_ABSENCES } from "./actions";
 
-const initialState = {
+const initialState: {
+  absences: {
+    [filter: string]: {
+      [page: string]: {
+        data: IAbsence[];
+        hasError: boolean;
+      };
+    };
+  };
+} = {
   absences: {},
 };
 
