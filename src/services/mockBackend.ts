@@ -1,4 +1,4 @@
-import { IAbsence, IFilter } from "../models/common.interfaces";
+import { IAbsenceResponse, IFilter } from "../models/types";
 import absences from "./absences.json";
 import members from "./members.json";
 
@@ -8,9 +8,9 @@ export default class MockBackend {
   public getAbsences(
     pageNum = 0,
     filter: IFilter = {}
-  ): Promise<[IAbsence[], number]> {
+  ): Promise<[IAbsenceResponse[], number]> {
     return new Promise((resolve, reject) => {
-      let { payload }: { payload: IAbsence[] } = absences;
+      let { payload }: { payload: IAbsenceResponse[] } = absences;
       if (pageNum >= 0) {
         // Filter
         if (filter && filter.items) {
@@ -53,7 +53,7 @@ export default class MockBackend {
         if (this.config.simulatedDelay) {
           setTimeout(() => resolve([page, count]), this.config.simulatedDelay);
         } else {
-          resolve([page, 0]);
+          resolve([page, count]);
         }
       } else {
         reject(new Error("Invalid page number"));

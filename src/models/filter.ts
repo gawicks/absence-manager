@@ -1,7 +1,7 @@
-import { IFilter } from "./common.interfaces";
+import { IFilter } from "./types";
 
 export default class Filter {
-  constructor(public value: IFilter) {}
+  constructor(public value?: IFilter) {}
 
   public key() {
     let filterKey = "";

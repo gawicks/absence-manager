@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import MockBackend from "../services/mockBackend";
-import { IAbsence } from "../models/common.interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAbsencesAction } from "../store/actions";
+import Filter from "../models/filter";
+import { State } from "../store/types";
 
 const columns: GridColDef[] = [
   {
@@ -20,7 +22,7 @@ const columns: GridColDef[] = [
     sortable: false,
   },
   {
-    field: "period",
+    field: "absence.period",
     headerName: "Period",
     type: "date",
     width: 300,
@@ -49,19 +51,27 @@ const columns: GridColDef[] = [
   },
 ];
 
-const backend = new MockBackend();
 export default function App() {
-  const [absences, setAbsences] = useState([] as IAbsence[]);
+  const [page] = useState(0);
+  const [filter] = useState(new Filter());
 
-  async function fetchAbsences() {
-    const [abs] = await backend.getAbsences();
-    setAbsences(abs);
-  }
+  const absences = useSelector((state: State) => {
+    const filterKey = filter.key();
+    return state.absences[filterKey]?.[page]?.data;
+  });
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchAbsences();
+    dispatch(fetchAbsencesAction(0, filter));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <DataGrid style={{ height: "500px" }} rows={absences} columns={columns} />
+    <DataGrid
+      style={{ height: "500px" }}
+      rows={absences || []}
+      columns={columns}
+    />
   );
 }

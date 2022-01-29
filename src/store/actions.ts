@@ -1,4 +1,4 @@
-import { IAbsence } from "../models/common.interfaces";
+import { IAbsenceResponse } from "../models/types";
 import Filter from "../models/filter";
 
 export const ABSENCES_LOADED = "ABSENCES_LOADED";
@@ -8,7 +8,7 @@ export const FETCH_ABSENCES = "FETCH_ABSENCES";
 export function absencesLoaded(
   page: number,
   count: number,
-  absences: IAbsence[],
+  absences: IAbsenceResponse[],
   filter: Filter
 ) {
   return {
@@ -24,7 +24,7 @@ export function absencesError(page: number, filter: Filter, error: Error) {
   };
 }
 
-export function fetchAbsences(page: number, filter: Filter) {
+export function fetchAbsencesAction(page: number, filter: Filter) {
   return {
     type: FETCH_ABSENCES,
     data: { page, filter },

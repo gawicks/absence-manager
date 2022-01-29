@@ -7,7 +7,7 @@ export interface IFilter {
   items?: IFilterItem[];
 }
 
-export interface IUser {
+export interface IUserResponse {
   crewId: number;
   id: number;
   image: string;
@@ -15,7 +15,7 @@ export interface IUser {
   userId: number;
 }
 
-export interface IAbsence {
+export interface IAbsenceResponse {
   admitterId: number | null;
   admitterNote: string;
   confirmedAt: string | null;
@@ -28,5 +28,12 @@ export interface IAbsence {
   startDate: string;
   type: string;
   userId: number;
-  user?: IUser;
+  user?: IUserResponse;
+}
+
+export interface IAbsence extends IAbsenceResponse {
+  "absence.period"?: string;
+  "user.id"?: number;
+  "user.name"?: string;
+  "user.image"?: string;
 }

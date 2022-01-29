@@ -1,25 +1,18 @@
 import { AnyAction } from "redux";
-import { IAbsence } from "../models/common.interfaces";
 import { ABSENCES_ERROR, ABSENCES_LOADED, FETCH_ABSENCES } from "./actions";
+// eslint-disable-next-line import/no-cycle
+import { fetchAbsences } from "./store";
+import { State } from "./types";
 
-const initialState: {
-  absences: {
-    [filter: string]: {
-      count: number;
-      [page: number]: {
-        data: IAbsence[];
-        hasError: boolean;
-      };
-    };
-  };
-} = {
+const initialState: State = {
   absences: {},
 };
 
 const absenceReducer = (state = initialState, action: AnyAction) => {
-  const filterStr = action.data.filter.key();
+  let filterStr: string;
   switch (action.type) {
     case ABSENCES_LOADED:
+      filterStr = action.data.filter.key();
       return {
         ...state,
         absences: {
@@ -34,10 +27,15 @@ const absenceReducer = (state = initialState, action: AnyAction) => {
           },
         },
       };
-    case ABSENCES_ERROR:
     case FETCH_ABSENCES:
+      // TODO: Move to thunk
+      fetchAbsences(action.data.page, action.data.filter);
+      return state;
+    case ABSENCES_ERROR:
+      return state;
     default:
       return state;
   }
 };
+
 export default absenceReducer;
