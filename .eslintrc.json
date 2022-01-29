@@ -27,6 +27,7 @@
     ],
     "rules": {
         "no-useless-constructor": "off",
+        "default-param-last": "off",
         "import/extensions": [
             2,
             "never",
