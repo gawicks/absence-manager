@@ -4,7 +4,7 @@ interface FilterItem {
 }
 
 export interface Filter {
-  items: FilterItem[];
+  items?: FilterItem[];
 }
 
 export interface User {

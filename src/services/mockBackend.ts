@@ -2,12 +2,12 @@ import { Absence, Filter } from "../models/common.interfaces";
 import absences from "./absences.json";
 import members from "./members.json";
 
-export default class mockBackend {
+export default class MockBackend {
   constructor(private config: { simulatedDelay?: number } = {}) {}
 
   public getAbsences(
-    pageNum: number,
-    filter: Filter
+    pageNum = 0,
+    filter: Filter = {}
   ): Promise<[Absence[], number]> {
     return new Promise((resolve, reject) => {
       let { payload }: { payload: Absence[] } = absences;
