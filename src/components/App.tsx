@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import MockBackend from "../services/mockBackend";
-import { Absence } from "../models/common.interfaces";
+import { IAbsence } from "../models/common.interfaces";
 
 const columns: GridColDef[] = [
   {
@@ -51,7 +51,7 @@ const columns: GridColDef[] = [
 
 const backend = new MockBackend();
 export default function App() {
-  const [absences, setAbsences] = useState([] as Absence[]);
+  const [absences, setAbsences] = useState([] as IAbsence[]);
 
   async function fetchAbsences() {
     const [abs] = await backend.getAbsences();

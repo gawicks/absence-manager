@@ -1,13 +1,13 @@
-interface FilterItem {
+interface IFilterItem {
   columnField: string;
   value: string;
 }
 
-export interface Filter {
-  items?: FilterItem[];
+export interface IFilter {
+  items?: IFilterItem[];
 }
 
-export interface User {
+export interface IUser {
   crewId: number;
   id: number;
   image: string;
@@ -15,7 +15,7 @@ export interface User {
   userId: number;
 }
 
-export interface Absence {
+export interface IAbsence {
   admitterId: number | null;
   admitterNote: string;
   confirmedAt: string | null;
@@ -28,5 +28,5 @@ export interface Absence {
   startDate: string;
   type: string;
   userId: number;
-  user?: User;
+  user?: IUser;
 }
