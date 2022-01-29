@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import MockBackend from "./services/mockBackend";
-import { Absence } from "./models/common.interfaces";
+import MockBackend from "../services/mockBackend";
+import { Absence } from "../models/common.interfaces";
 
 const columns: GridColDef[] = [
   {
