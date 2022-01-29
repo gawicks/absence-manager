@@ -12,6 +12,7 @@ export default class mockBackend {
     return new Promise((resolve, reject) => {
       let { payload }: { payload: Absence[] } = absences;
       if (pageNum >= 0) {
+        // Filter
         if (filter && filter.items) {
           filter.items.forEach((item) => {
             switch (item.columnField) {
@@ -34,9 +35,11 @@ export default class mockBackend {
             }
           });
         }
+        // Paginate
         const count = payload.length;
         let page = payload.slice(pageNum * 10, pageNum * 10 + 10);
 
+        // Join
         page = page.map((absence) => {
           const user = members.payload.find(
             (member) => member.userId === absence.userId
