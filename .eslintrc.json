@@ -1,4 +1,38 @@
 {
-    "extends": ["react-app", "react-app/jest"]
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-typescript-prettier",
+        "plugin:import/typescript",
+        "prettier",
+        "prettier/react",
+        "plugin:css-modules/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": [
+            "./tsconfig.json"
+        ]
+    },
+    "plugins": [
+        "prettier",
+        "css-modules"
+    ],
+    "rules": {
+        "no-useless-constructor": "off",
+        "import/extensions": [
+            2,
+            "never",
+            {
+                "json": "always"
+            }
+        ]
+    }
 }
-  
