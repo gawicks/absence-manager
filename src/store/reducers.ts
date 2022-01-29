@@ -5,7 +5,8 @@ import { ABSENCES_ERROR, ABSENCES_LOADED, FETCH_ABSENCES } from "./actions";
 const initialState: {
   absences: {
     [filter: string]: {
-      [page: string]: {
+      count: number;
+      [page: number]: {
         data: IAbsence[];
         hasError: boolean;
       };
@@ -27,8 +28,8 @@ const absenceReducer = (state = initialState, action: AnyAction) => {
             ...state.absences[filterStr],
             count: action.data.count,
             [action.data.page]: {
-              error: null,
               data: action.data.absences,
+              hasError: false,
             },
           },
         },
