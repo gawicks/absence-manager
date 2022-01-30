@@ -63,6 +63,10 @@ export default function App() {
     const filterKey = filter.key();
     return state.absences[filterKey]?.count;
   });
+  const hasError = useSelector((state: State) => {
+    const filterKey = filter.key();
+    return state.absences[filterKey]?.[page]?.hasError;
+  });
 
   const dispatch = useDispatch();
 
@@ -93,6 +97,7 @@ export default function App() {
       paginationMode="server"
       onPageChange={(pageNo) => pageChanged(pageNo)}
       rowCount={rowCount}
+      error={hasError ? true : undefined}
     />
   );
 }
