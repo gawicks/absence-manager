@@ -2,13 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import { Provider } from "react-redux";
-import App from "./components/App";
+import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
+import ErrorProvider from "./context";
+import { errorService } from "./services/serviceProviders";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ErrorProvider.Provider value={errorService}>
+      <App />
+    </ErrorProvider.Provider>
   </Provider>,
   document.getElementById("root")
 );
