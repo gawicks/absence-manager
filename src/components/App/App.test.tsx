@@ -9,12 +9,12 @@ import { Provider } from "react-redux";
 import { applyMiddleware, createStore, Store } from "redux";
 import thunk from "redux-thunk";
 import React from "react";
-import ErrorProvider from "../../context";
 import ErrorService from "../../services/errorService";
 import MockBackend from "../../services/mockBackend";
 import absenceReducer from "../../store/reducers";
 import testData from "./App.test.json";
 import App from "./App";
+import { DisableVirtProvider, ErrorProvider } from "../../context";
 
 describe("Absence Page", () => {
   describe("Grid", () => {
@@ -40,9 +40,11 @@ describe("Absence Page", () => {
       );
       ({ container } = render(
         <Provider store={store}>
-          <ErrorProvider.Provider value={errorService}>
-            <App />
-          </ErrorProvider.Provider>
+          <DisableVirtProvider.Provider value>
+            <ErrorProvider.Provider value={errorService}>
+              <App />
+            </ErrorProvider.Provider>
+          </DisableVirtProvider.Provider>
         </Provider>
       ));
       await waitFor(() => expect(backend.getAbsences).toHaveBeenCalledTimes(1));

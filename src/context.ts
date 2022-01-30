@@ -1,4 +1,6 @@
 import React from "react";
 
 const ErrorProvider = React.createContext({});
-export default ErrorProvider;
+const DisableVirtProvider = React.createContext(false);
+
+export { ErrorProvider, DisableVirtProvider };
