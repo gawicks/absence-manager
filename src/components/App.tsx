@@ -72,7 +72,10 @@ export default function App() {
   }, [page, filter]);
 
   function filterChanged(newFilter: Filter) {
-    setFilter(newFilter);
+    if (!filter.isEqual(newFilter)) {
+      setPage(0);
+      setFilter(newFilter);
+    }
   }
 
   function pageChanged(pageNo: number) {
