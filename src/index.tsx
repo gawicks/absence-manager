@@ -5,14 +5,16 @@ import { Provider } from "react-redux";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
-import ErrorProvider from "./context";
 import { errorService } from "./services/serviceProviders";
+import { ServiceContext } from "./context";
 
+// eslint-disable-next-line react/jsx-no-constructed-context-values
+const serviceProviders = { errorService };
 ReactDOM.render(
   <Provider store={store}>
-    <ErrorProvider.Provider value={errorService}>
+    <ServiceContext.Provider value={serviceProviders}>
       <App />
-    </ErrorProvider.Provider>
+    </ServiceContext.Provider>
   </Provider>,
   document.getElementById("root")
 );

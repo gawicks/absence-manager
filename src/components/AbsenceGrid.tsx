@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { IAbsence } from "../models/types";
 import Filter from "../models/filter";
-import { DisableVirtProvider } from "../context";
+import { VirtualizationContext } from "../context";
 
 type AbsenceGridProps = {
   absences: IAbsence[];
@@ -22,7 +22,7 @@ export default function AbsenceGrid({
   onPageChanged: pageChanged,
   onFilterChanged: filterChanged,
 }: AbsenceGridProps) {
-  const disableColVirt = useContext(DisableVirtProvider);
+  const enableVirtualization = useContext(VirtualizationContext);
 
   return (
     <DataGrid
@@ -37,7 +37,7 @@ export default function AbsenceGrid({
       error={hasError ? true : undefined}
       onPageChange={(pageNo) => pageChanged(pageNo)}
       onFilterModelChange={(filter) => filterChanged(new Filter(filter))}
-      columnBuffer={disableColVirt ? columns.length : undefined}
+      columnBuffer={enableVirtualization ? undefined : columns.length}
     />
   );
 }

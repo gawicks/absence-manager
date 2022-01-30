@@ -1,6 +1,6 @@
 import React from "react";
 
-const ErrorProvider = React.createContext({});
-const DisableVirtProvider = React.createContext(false);
+const ServiceContext = React.createContext({});
+const VirtualizationContext = React.createContext(true);
 
-export { ErrorProvider, DisableVirtProvider };
+export { ServiceContext, VirtualizationContext };

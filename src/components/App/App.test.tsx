@@ -14,7 +14,7 @@ import MockBackend from "../../services/mockBackend";
 import absenceReducer from "../../store/reducers";
 import testData from "./App.test.json";
 import App from "./App";
-import { DisableVirtProvider, ErrorProvider } from "../../context";
+import { VirtualizationContext, ServiceContext } from "../../context";
 
 describe("Absence Page", () => {
   describe("Grid", () => {
@@ -38,13 +38,15 @@ describe("Absence Page", () => {
         absenceReducer,
         applyMiddleware(thunk.withExtraArgument({ backend, errorService }))
       );
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      const serviceContext = { errorService };
       ({ container } = render(
         <Provider store={store}>
-          <DisableVirtProvider.Provider value>
-            <ErrorProvider.Provider value={errorService}>
+          <VirtualizationContext.Provider value={false}>
+            <ServiceContext.Provider value={serviceContext}>
               <App />
-            </ErrorProvider.Provider>
-          </DisableVirtProvider.Provider>
+            </ServiceContext.Provider>
+          </VirtualizationContext.Provider>
         </Provider>
       ));
       await waitFor(() => expect(backend.getAbsences).toHaveBeenCalledTimes(1));
