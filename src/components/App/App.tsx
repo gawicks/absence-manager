@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import Filter from "../models/filter";
-import { State } from "../store/types";
-import fetchAbsences from "../store/thunks";
-import AbsenceGrid from "./AbsenceGrid";
+import Filter from "../../models/filter";
+import { State } from "../../store/types";
+import fetchAbsences from "../../store/thunks";
+import AbsenceGrid from "../AbsenceGrid";
 
 const columns: GridColDef[] = [
   {
