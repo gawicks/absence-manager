@@ -18,11 +18,14 @@ export default class MockBackend {
             switch (item.columnField) {
               case "period":
                 payload = payload.filter((absence) => {
-                  const startDate = Date.parse(absence.startDate);
-                  const endDate = Date.parse(absence.endDate);
-                  const filterDate = Date.parse(item.value);
+                  if (item.value) {
+                    const startDate = Date.parse(absence.startDate);
+                    const endDate = Date.parse(absence.endDate);
+                    const filterDate = Date.parse(item.value);
 
-                  return filterDate >= startDate && filterDate <= endDate;
+                    return filterDate >= startDate && filterDate <= endDate;
+                  }
+                  return true;
                 });
                 break;
               case "type":

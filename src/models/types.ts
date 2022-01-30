@@ -1,6 +1,6 @@
 interface IFilterItem {
-  columnField: string;
-  value: string;
+  columnField?: string;
+  value?: string;
 }
 
 export interface IFilter {

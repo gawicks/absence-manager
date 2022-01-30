@@ -53,7 +53,7 @@ const columns: GridColDef[] = [
 
 export default function App() {
   const [page] = useState(0);
-  const [filter] = useState(new Filter());
+  const [filter, setFilter] = useState(new Filter());
 
   const absences = useSelector((state: State) => {
     const filterKey = filter.key();
@@ -63,15 +63,22 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAbsencesAction(0, filter));
+    dispatch(fetchAbsencesAction(page, filter));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page, filter]);
+
+  function filterChanged(newFilter: Filter) {
+    setFilter(newFilter);
+  }
 
   return (
     <DataGrid
       style={{ height: "500px" }}
       rows={absences || []}
       columns={columns}
+      filterMode="server"
+      onFilterModelChange={(value) => filterChanged(new Filter(value))}
+      pageSize={10}
     />
   );
 }
