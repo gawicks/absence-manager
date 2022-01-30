@@ -52,12 +52,16 @@ const columns: GridColDef[] = [
 ];
 
 export default function App() {
-  const [page] = useState(0);
+  const [page, setPage] = useState(0);
   const [filter, setFilter] = useState(new Filter());
 
   const absences = useSelector((state: State) => {
     const filterKey = filter.key();
     return state.absences[filterKey]?.[page]?.data;
+  });
+  const rowCount = useSelector((state: State) => {
+    const filterKey = filter.key();
+    return state.absences[filterKey]?.count;
   });
 
   const dispatch = useDispatch();
@@ -71,6 +75,10 @@ export default function App() {
     setFilter(newFilter);
   }
 
+  function pageChanged(pageNo: number) {
+    setPage(pageNo);
+  }
+
   return (
     <DataGrid
       style={{ height: "500px" }}
@@ -79,6 +87,9 @@ export default function App() {
       filterMode="server"
       onFilterModelChange={(value) => filterChanged(new Filter(value))}
       pageSize={10}
+      paginationMode="server"
+      onPageChange={(pageNo) => pageChanged(pageNo)}
+      rowCount={rowCount}
     />
   );
 }
