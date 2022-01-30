@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import Filter from "../models/filter";
 import { State } from "../store/types";
 import fetchAbsences from "../store/thunks";
+import AbsenceGrid from "./AbsenceGrid";
 
 const columns: GridColDef[] = [
   {
@@ -87,17 +88,16 @@ export default function App() {
   }
 
   return (
-    <DataGrid
-      style={{ height: "500px" }}
-      rows={absences || []}
-      columns={columns}
-      filterMode="server"
-      onFilterModelChange={(value) => filterChanged(new Filter(value))}
-      pageSize={10}
-      paginationMode="server"
-      onPageChange={(pageNo) => pageChanged(pageNo)}
-      rowCount={rowCount}
-      error={hasError ? true : undefined}
-    />
+    <div style={{ height: "500px" }}>
+      <AbsenceGrid
+        absences={absences}
+        columns={columns}
+        page={page}
+        onFilterChanged={(value: Filter) => filterChanged(value)}
+        onPageChanged={(pageNo: number) => pageChanged(pageNo)}
+        rowCount={rowCount}
+        hasError={hasError}
+      />
+    </div>
   );
 }
