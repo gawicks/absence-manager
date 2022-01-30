@@ -1,12 +1,10 @@
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
-import MockBackend from "../services/mockBackend";
+import { backend, errorService } from "../services/serviceProviders";
 import absenceReducer from "./reducers";
-
-const backend = new MockBackend({ simulatedDelay: 500 });
 
 const store = createStore(
   absenceReducer,
-  applyMiddleware(thunk.withExtraArgument(backend))
+  applyMiddleware(thunk.withExtraArgument({ backend, errorService }))
 );
 export default store;
