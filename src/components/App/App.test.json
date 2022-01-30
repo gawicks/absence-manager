@@ -1,0 +1,56 @@
+{
+  "AbsenceTypeSickness": {
+    "admitterId": null,
+    "admitterNote": "Test note",
+    "confirmedAt": "2020-12-12T18:03:55.000+01:00",
+    "createdAt": "2020-12-12T14:17:01.000+01:00",
+    "crewId": 352,
+    "endDate": "2021-01-13",
+    "id": 2351,
+    "memberNote": "",
+    "rejectedAt": null,
+    "startDate": "2021-01-13",
+    "type": "sickness",
+    "userId": 2664,
+    "user": {
+      "crewId": 352,
+      "id": 2650,
+      "image": "https://loremflickr.com/300/400",
+      "name": "Mike",
+      "userId": 2664
+    },
+    "user.crewId": 352,
+    "period": "2021-01-13 - 2021-01-13",
+    "user.id": 2650,
+    "user.image": "https://loremflickr.com/300/400",
+    "user.name": "Mike",
+    "user.userId": 2664
+  },
+  "AbsenceTypeVacation": {
+    "admitterId": null,
+    "admitterNote": "Test note 2",
+    "confirmedAt": "2021-01-09T18:43:29.000+01:00",
+    "createdAt": "2021-01-09T17:45:47.000+01:00",
+    "crewId": 352,
+    "endDate": "2021-01-11",
+    "id": 2634,
+    "memberNote": "Nachmittag 0,5 Tage. Danke.",
+    "rejectedAt": null,
+    "startDate": "2021-01-11",
+    "type": "vacation",
+    "userId": 649,
+    "user": {
+      "crewId": 352,
+      "id": 713,
+      "image": "https://loremflickr.com/300/400",
+      "name": "Ines",
+      "userId": 649
+    },
+    "user.crewId": 352,
+    "period": "2021-01-11 - 2021-01-11",
+    "user.id": 713,
+    "user.image": "https://loremflickr.com/300/400",
+    "user.name": "Ines",
+    "user.userId": 649
+  }
+}
