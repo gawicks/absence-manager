@@ -1,7 +1,5 @@
 import { AnyAction } from "redux";
-import { ABSENCES_ERROR, ABSENCES_LOADED, FETCH_ABSENCES } from "./actions";
-// eslint-disable-next-line import/no-cycle
-import { fetchAbsences } from "./store";
+import { ABSENCES_ERROR, ABSENCES_LOADED } from "./actions";
 import { State } from "./types";
 
 const initialState: State = {
@@ -27,10 +25,6 @@ const absenceReducer = (state = initialState, action: AnyAction) => {
           },
         },
       };
-    case FETCH_ABSENCES:
-      // TODO: Move to thunk
-      fetchAbsences(action.data.page, action.data.filter);
-      return state;
     case ABSENCES_ERROR:
       return state;
     default:

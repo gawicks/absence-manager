@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAbsencesAction } from "../store/actions";
 import Filter from "../models/filter";
 import { State } from "../store/types";
+import fetchAbsences from "../store/thunks";
 
 const columns: GridColDef[] = [
   {
@@ -67,7 +67,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAbsencesAction(page, filter));
+    dispatch(fetchAbsences(page, filter));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, filter]);
 
