@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import Filter from "../../models/filter";
 import { State } from "../../store/types";
 import fetchAbsences from "../../store/thunks";
 import AbsenceGrid from "../AbsenceGrid";
+import styles from "./App.module.scss";
+import logo from "./logo_crewmeister_white.svg";
 
 const columns: GridColDef[] = [
   {
@@ -88,16 +90,20 @@ export default function App() {
   }
 
   return (
-    <div style={{ height: "500px" }}>
-      <AbsenceGrid
-        absences={absences}
-        columns={columns}
-        page={page}
-        onFilterChanged={(value: Filter) => filterChanged(value)}
-        onPageChanged={(pageNo: number) => pageChanged(pageNo)}
-        rowCount={rowCount}
-        hasError={hasError}
-      />
-    </div>
+    <>
+      <img alt="logo" className={styles.logo} src={logo} />
+      <h1 className={styles.title}>Absences</h1>
+      <div style={{ height: "500px" }}>
+        <AbsenceGrid
+          absences={absences}
+          columns={columns}
+          page={page}
+          onFilterChanged={(value: Filter) => filterChanged(value)}
+          onPageChanged={(pageNo: number) => pageChanged(pageNo)}
+          rowCount={rowCount}
+          hasError={hasError}
+        />
+      </div>
+    </>
   );
 }

@@ -2,20 +2,31 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import { Provider } from "react-redux";
+import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
 import { errorService } from "./services/serviceProviders";
 import { ServiceContext } from "./context";
 
+const theme = createTheme({
+  palette: {
+    type: "dark",
+  },
+});
+
 // eslint-disable-next-line react/jsx-no-constructed-context-values
 const serviceProviders = { errorService };
 ReactDOM.render(
-  <Provider store={store}>
-    <ServiceContext.Provider value={serviceProviders}>
-      <App />
-    </ServiceContext.Provider>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <CssBaseline>
+      <Provider store={store}>
+        <ServiceContext.Provider value={serviceProviders}>
+          <App />
+        </ServiceContext.Provider>
+      </Provider>
+    </CssBaseline>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

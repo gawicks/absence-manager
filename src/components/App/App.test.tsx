@@ -45,6 +45,21 @@ async function setupMocks(
   return container;
 }
 describe("Absence Page", () => {
+  describe("Heading", () => {
+    beforeEach(async () => {
+      const mockGetAbsences = () => {
+        const ret: [IAbsenceResponse[], number] = [[], 0];
+        return Promise.resolve(ret);
+      };
+      const mockErrorHandler = () => {
+        /* do nothing */
+      };
+      await setupMocks(mockGetAbsences, mockErrorHandler);
+    });
+    it("Should display the title", async () => {
+      expect(screen.getByText("Absences")).toBeInTheDocument();
+    });
+  });
   describe("Grid", () => {
     let container: HTMLElement;
     beforeEach(async () => {
