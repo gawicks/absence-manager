@@ -26,7 +26,20 @@ const absenceReducer = (state = initialState, action: AnyAction) => {
         },
       };
     case ABSENCES_ERROR:
-      return state;
+      filterStr = action.data.filter.key();
+      return {
+        ...state,
+        absences: {
+          ...state.absences,
+          [filterStr]: {
+            ...state.absences[filterStr],
+            [action.data.page]: {
+              data: null,
+              hasError: true,
+            },
+          },
+        },
+      };
     default:
       return state;
   }

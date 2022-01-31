@@ -6,7 +6,7 @@ import {
   within,
 } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore, Store } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import React from "react";
 import ErrorService from "../../services/errorService";
@@ -15,41 +15,50 @@ import absenceReducer from "../../store/reducers";
 import testData from "./App.test.json";
 import App from "./App";
 import { VirtualizationContext, ServiceContext } from "../../context";
+import { IAbsenceResponse } from "../../models/types";
 
+async function setupMocks(
+  mockGetAbsences: () => Promise<[IAbsenceResponse[], number]>,
+  mockErrorHandler: () => void
+): Promise<HTMLElement> {
+  const backend = new MockBackend();
+  const errorService = new ErrorService();
+  jest.spyOn(backend, "getAbsences").mockImplementation(mockGetAbsences);
+  jest.spyOn(errorService, "error").mockImplementation(mockErrorHandler);
+
+  const store = createStore(
+    absenceReducer,
+    applyMiddleware(thunk.withExtraArgument({ backend, errorService }))
+  );
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  const serviceContext = { errorService };
+  const { container } = render(
+    <Provider store={store}>
+      <VirtualizationContext.Provider value={false}>
+        <ServiceContext.Provider value={serviceContext}>
+          <App />
+        </ServiceContext.Provider>
+      </VirtualizationContext.Provider>
+    </Provider>
+  );
+  await waitFor(() => expect(backend.getAbsences).toHaveBeenCalledTimes(1));
+  return container;
+}
 describe("Absence Page", () => {
   describe("Grid", () => {
-    const backend = new MockBackend();
-    const errorService = new ErrorService();
-    let store: Store;
     let container: HTMLElement;
     beforeEach(async () => {
-      jest
-        .spyOn(backend, "getAbsences")
-        .mockResolvedValue([
+      const mockGetAbsences = () => {
+        const ret: [IAbsenceResponse[], number] = [
           [testData.AbsenceTypeSickness, testData.AbsenceTypeVacation],
           2,
-        ]);
-
-      jest.spyOn(errorService, "error").mockImplementation(() => {
-        // do nothing
-      });
-
-      store = createStore(
-        absenceReducer,
-        applyMiddleware(thunk.withExtraArgument({ backend, errorService }))
-      );
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      const serviceContext = { errorService };
-      ({ container } = render(
-        <Provider store={store}>
-          <VirtualizationContext.Provider value={false}>
-            <ServiceContext.Provider value={serviceContext}>
-              <App />
-            </ServiceContext.Provider>
-          </VirtualizationContext.Provider>
-        </Provider>
-      ));
-      await waitFor(() => expect(backend.getAbsences).toHaveBeenCalledTimes(1));
+        ];
+        return Promise.resolve(ret);
+      };
+      const mockErrorHandler = () => {
+        /* do nothing */
+      };
+      container = await setupMocks(mockGetAbsences, mockErrorHandler);
     });
     it("Should display columns", async () => {
       const columns = screen.queryAllByRole("columnheader");
@@ -81,6 +90,35 @@ describe("Absence Page", () => {
       expect(within(select).getByText("vacation")).toBeVisible();
       expect(within(select).getByText("sickness")).toBeVisible();
       expect(within(select).getByText("other")).toBeVisible();
+    });
+  });
+  describe("Grid Empty", () => {
+    beforeEach(async () => {
+      const mockGetAbsences = () => {
+        const ret: [IAbsenceResponse[], number] = [[], 0];
+        return Promise.resolve(ret);
+      };
+      const mockErrorHandler = () => {
+        /* do nothing */
+      };
+      await setupMocks(mockGetAbsences, mockErrorHandler);
+    });
+    it("Should display an empty state if results empty", async () => {
+      expect(screen.getByText("No rows")).toBeInTheDocument();
+    });
+  });
+  describe("Grid Error", () => {
+    beforeEach(async () => {
+      const mockGetAbsences = () => {
+        return Promise.reject(new Error());
+      };
+      const mockErrorHandler = () => {
+        /* do nothing */
+      };
+      await setupMocks(mockGetAbsences, mockErrorHandler);
+    });
+    it("Should display an error state if results unavailable", async () => {
+      expect(screen.getByText("An error occurred.")).toBeInTheDocument();
     });
   });
 });
