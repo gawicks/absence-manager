@@ -106,7 +106,7 @@ export default function App() {
     <>
       <img alt="logo" className={styles.logo} src={logo} />
       <h1 className={styles.title}>Absences</h1>
-      <div style={{ height: "500px" }}>
+      <div className={styles.gridContainer}>
         <AbsenceGrid
           absences={absences}
           columns={columns}
