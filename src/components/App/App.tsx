@@ -38,7 +38,7 @@ const columns: GridColDef[] = [
     sortable: false,
   },
   {
-    field: "absence.period",
+    field: "period",
     headerName: "Period",
     type: "date",
     width: 300,

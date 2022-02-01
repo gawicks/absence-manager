@@ -39,10 +39,10 @@ export default class AbsenceService implements IAbsenceService {
       const absence: IAbsence = { ...absenceResponse };
       if (absence.user) {
         // Flatten
+        absence.period = `${absence.startDate} - ${absence.endDate}`;
         absence["user.id"] = absence.user.id;
         absence["user.name"] = absence.user.name;
         absence["user.image"] = absence.user.image;
-        absence["absence.period"] = `${absence.startDate} - ${absence.endDate}`;
       }
       return absence;
     });

@@ -38,7 +38,7 @@ export interface IAbsenceResponse {
 }
 
 export interface IAbsence extends IAbsenceResponse {
-  "absence.period"?: string;
+  period?: string;
   "user.id"?: number;
   "user.name"?: string;
   "user.image"?: string;

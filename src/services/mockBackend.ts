@@ -15,7 +15,7 @@ export default class MockBackend implements IBackend {
     pageNum: number | undefined,
     filter: IFilterValue = {}
   ): Promise<[IAbsenceResponse[], number]> {
-    if (pageNum && pageNum < 0) {
+    if (pageNum != null && pageNum < 0) {
       return Promise.reject(new Error("Invalid page number"));
     }
     if (this.config.simulateError) {
