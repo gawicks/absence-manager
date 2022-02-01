@@ -1,12 +1,9 @@
 import React, { useContext } from "react";
-import { DataGrid, GridColDef, GridToolbarContainer } from "@mui/x-data-grid";
-import { Download } from "@mui/icons-material";
-import { Tooltip, IconButton } from "@material-ui/core";
-import FileSaver from "file-saver";
-import ical from "ical-generator";
-import { IAbsence } from "../models/types";
-import Filter from "../models/filter";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { IAbsence, IFilter } from "../models/types";
 import { VirtualizationContext } from "../context";
+import Filter from "../models/filter";
+import CustomToolbar from "./CustomToolbar/CustomToolbar";
 
 type AbsenceGridProps = {
   absences: IAbsence[] | null;
@@ -14,36 +11,10 @@ type AbsenceGridProps = {
   hasError: boolean;
   page: number;
   rowCount: number;
+  filter: Filter;
   onPageChanged: (page: number) => void;
-  onFilterChanged: (filter: Filter) => void;
+  onFilterChanged: (filter: IFilter) => void;
 };
-
-function CustomToolbar({ absences }: { absences: IAbsence[] }) {
-  function exportiCal() {
-    const calendar = ical({ name: "absences" });
-    if (absences) {
-      absences.forEach((absence) => {
-        calendar.createEvent({
-          start: new Date(absence.startDate),
-          end: new Date(absence.endDate),
-          summary: `${absence["user.name"]} - ${absence.type}}`,
-          description: `${absence["user.name"]}, ${absence.type}}, ${absence.admitterNote}}, ${absence.memberNote}}`,
-          url: "https://crewmeister.com/",
-        });
-      });
-    }
-    FileSaver.saveAs(calendar.toBlob(), "absences.ical");
-  }
-  return (
-    <GridToolbarContainer style={{ justifyContent: "end" }}>
-      <Tooltip title="Export to iCal">
-        <IconButton color="primary" onClick={() => exportiCal()}>
-          <Download />
-        </IconButton>
-      </Tooltip>
-    </GridToolbarContainer>
-  );
-}
 
 export default function AbsenceGrid({
   absences,
@@ -51,6 +22,7 @@ export default function AbsenceGrid({
   hasError,
   page,
   rowCount,
+  filter,
   onPageChanged: pageChanged,
   onFilterChanged: filterChanged,
 }: AbsenceGridProps) {
@@ -71,11 +43,11 @@ export default function AbsenceGrid({
         Toolbar: CustomToolbar,
       }}
       componentsProps={{
-        toolbar: { absences },
+        toolbar: { filter },
       }}
       columnBuffer={enableVirtualization ? undefined : columns.length}
       onPageChange={(pageNo) => pageChanged(pageNo)}
-      onFilterModelChange={(filter) => filterChanged(new Filter(filter))}
+      onFilterModelChange={(value) => filterChanged(new Filter(value))}
     />
   );
 }

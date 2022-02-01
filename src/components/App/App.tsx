@@ -111,10 +111,11 @@ export default function App() {
           absences={absences}
           columns={columns}
           page={page}
-          onFilterChanged={(value: Filter) => filterChanged(value)}
-          onPageChanged={(pageNo: number) => pageChanged(pageNo)}
           rowCount={rowCount}
           hasError={hasError}
+          filter={filter}
+          onFilterChanged={(value: Filter) => filterChanged(value)}
+          onPageChanged={(pageNo: number) => pageChanged(pageNo)}
         />
       </div>
     </>
