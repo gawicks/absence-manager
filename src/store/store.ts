@@ -1,10 +1,11 @@
-import { applyMiddleware, createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { backend, errorService } from "../services/serviceProviders";
+import { absenceService, errorService } from "../services/serviceProviders";
 import absenceReducer from "./reducers";
 
-const store = createStore(
-  absenceReducer,
-  applyMiddleware(thunk.withExtraArgument({ backend, errorService }))
-);
+const store = configureStore({
+  reducer: absenceReducer,
+  middleware: [thunk.withExtraArgument({ absenceService, errorService })],
+});
+
 export default store;

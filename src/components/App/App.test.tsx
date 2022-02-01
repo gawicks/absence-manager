@@ -6,36 +6,40 @@ import {
   within,
 } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import React from "react";
+import { configureStore } from "@reduxjs/toolkit";
 import ErrorService from "../../services/errorService";
 import MockBackend from "../../services/mockBackend";
-import absenceReducer from "../../store/reducers";
 import testData from "./App.test.json";
 import App from "./App";
 import { VirtualizationContext, ServiceContext } from "../../context";
 import { IAbsenceResponse } from "../../models/types";
+import AbsenceService from "../../services/absenceService";
+import absenceReducer from "../../store/reducers";
 
 async function setupMocks(
   mockGetAbsences: () => Promise<[IAbsenceResponse[], number]>,
   mockErrorHandler: () => void
 ): Promise<HTMLElement> {
   const backend = new MockBackend();
+  const absenceService = new AbsenceService(backend);
   const errorService = new ErrorService();
   jest.spyOn(backend, "getAbsences").mockImplementation(mockGetAbsences);
   jest.spyOn(errorService, "error").mockImplementation(mockErrorHandler);
 
-  const store = createStore(
-    absenceReducer,
-    applyMiddleware(thunk.withExtraArgument({ backend, errorService }))
-  );
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const serviceContext = { errorService };
+  const services = { absenceService, errorService };
+
+  const store = configureStore({
+    reducer: absenceReducer,
+    middleware: [thunk.withExtraArgument({ absenceService, errorService })],
+  });
+
   const { container } = render(
     <Provider store={store}>
       <VirtualizationContext.Provider value={false}>
-        <ServiceContext.Provider value={serviceContext}>
+        <ServiceContext.Provider value={services}>
           <App />
         </ServiceContext.Provider>
       </VirtualizationContext.Provider>

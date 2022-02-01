@@ -1,32 +1,12 @@
-import { IAbsenceResponse } from "../models/types";
-import Filter from "../models/filter";
+import { createAction } from "@reduxjs/toolkit";
+import {
+  ABSENCES_ERROR,
+  ABSENCES_LOADED,
+  IAbsenceErrorPayload,
+  IAbsenceLoadedPayload,
+} from "./types";
 
-export const ABSENCES_LOADED = "ABSENCES_LOADED";
-export const ABSENCES_ERROR = "ABSENCES_ERROR";
-export const FETCH_ABSENCES = "FETCH_ABSENCES";
+const absencesLoaded = createAction<IAbsenceLoadedPayload>(ABSENCES_LOADED);
+const absencesError = createAction<IAbsenceErrorPayload>(ABSENCES_ERROR);
 
-export function absencesLoaded(
-  page: number,
-  count: number,
-  absences: IAbsenceResponse[],
-  filter: Filter
-) {
-  return {
-    type: ABSENCES_LOADED,
-    data: { page, count, absences, filter },
-  };
-}
-
-export function absencesError(page: number, filter: Filter, error: Error) {
-  return {
-    type: ABSENCES_ERROR,
-    data: { page, filter, error },
-  };
-}
-
-export function fetchAbsencesAction(page: number, filter: Filter) {
-  return {
-    type: FETCH_ABSENCES,
-    data: { page, filter },
-  };
-}
+export { absencesLoaded, absencesError };

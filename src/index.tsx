@@ -6,7 +6,7 @@ import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
-import { errorService } from "./services/serviceProviders";
+import { absenceService, errorService } from "./services/serviceProviders";
 import { ServiceContext } from "./context";
 
 const theme = createTheme({
@@ -16,7 +16,7 @@ const theme = createTheme({
 });
 
 // eslint-disable-next-line react/jsx-no-constructed-context-values
-const serviceProviders = { errorService };
+const serviceProviders = { absenceService, errorService };
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <CssBaseline>

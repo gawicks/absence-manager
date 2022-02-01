@@ -9,7 +9,7 @@ import Filter from "../models/filter";
 import { VirtualizationContext } from "../context";
 
 type AbsenceGridProps = {
-  absences: IAbsence[];
+  absences: IAbsence[] | null;
   columns: GridColDef[];
   hasError: boolean;
   page: number;

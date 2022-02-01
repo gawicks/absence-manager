@@ -3,8 +3,14 @@ interface IFilterItem {
   value?: string;
 }
 
-export interface IFilter {
+export interface IFilterValue {
   items?: IFilterItem[];
+}
+
+export interface IFilter {
+  key: string;
+  isEmpty: boolean;
+  isEqual: (filter: IFilter) => boolean;
 }
 
 export interface IUserResponse {
@@ -36,4 +42,23 @@ export interface IAbsence extends IAbsenceResponse {
   "user.id"?: number;
   "user.name"?: string;
   "user.image"?: string;
+}
+
+export interface IBackend {
+  getAbsences(
+    pageNum?: number,
+    filter?: IFilterValue
+  ): Promise<[IAbsenceResponse[], number]>;
+}
+
+export interface IAbsenceService {
+  getAbsencePage(
+    pageNum?: number,
+    filter?: IFilter
+  ): Promise<[IAbsenceResponse[], number]>;
+  getAllAbsences(filter?: IFilter): Promise<[IAbsenceResponse[], number]>;
+}
+
+export interface IErrorService {
+  error(message: string): void;
 }

@@ -1,8 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
 import ErrorSnackbar from "../components/ErrorSnackbar";
+import { IErrorService } from "../models/types";
 
-export default class ErrorService {
+export default class ErrorService implements IErrorService {
   private key = 0;
 
   private inc() {

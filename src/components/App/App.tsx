@@ -72,15 +72,15 @@ export default function App() {
   const [filter, setFilter] = useState(new Filter());
 
   const absences = useSelector((state: State) => {
-    const filterKey = filter.key();
+    const filterKey = filter.key;
     return state.absences[filterKey]?.[page]?.data;
   });
   const rowCount = useSelector((state: State) => {
-    const filterKey = filter.key();
+    const filterKey = filter.key;
     return state.absences[filterKey]?.count;
   });
   const hasError = useSelector((state: State) => {
-    const filterKey = filter.key();
+    const filterKey = filter.key;
     return state.absences[filterKey]?.[page]?.hasError;
   });
 

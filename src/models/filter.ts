@@ -1,10 +1,10 @@
 import { isEqual } from "lodash-es";
-import { IFilter } from "./types";
+import { IFilter, IFilterValue } from "./types";
 
-export default class Filter {
-  constructor(public value?: IFilter) {}
+export default class Filter implements IFilter {
+  constructor(public value?: IFilterValue) {}
 
-  public key() {
+  public get key() {
     let filterKey = "";
     if (this.value && this.value.items) {
       this.value.items.forEach((item) => {
