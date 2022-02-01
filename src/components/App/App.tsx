@@ -104,8 +104,10 @@ export default function App() {
 
   return (
     <>
-      <img alt="logo" className={styles.logo} src={logo} />
-      <h1 className={styles.title}>Absences</h1>
+      <div className={styles.header}>
+        <img alt="logo" className={styles.logo} src={logo} />
+        <h1 className={styles.title}>Absences</h1>
+      </div>
       <div className={styles.gridContainer}>
         <AbsenceGrid
           absences={absences}
