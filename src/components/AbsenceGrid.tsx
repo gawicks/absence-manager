@@ -3,7 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { IAbsence, IFilter } from "../models/types";
 import { VirtualizationContext } from "../context";
 import Filter from "../models/filter";
-import CustomToolbar from "./CustomToolbar/CustomToolbar";
+import ExportToolbar from "./CustomToolbar/ExportToolbar";
 
 type AbsenceGridProps = {
   absences: IAbsence[] | null;
@@ -41,7 +41,7 @@ export default function AbsenceGrid({
       pageSize={10}
       error={hasError ? true : undefined}
       components={{
-        Toolbar: CustomToolbar,
+        Toolbar: ExportToolbar,
       }}
       componentsProps={{
         toolbar: { filter },

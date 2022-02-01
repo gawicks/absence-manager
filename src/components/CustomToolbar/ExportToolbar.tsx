@@ -6,9 +6,9 @@ import ical from "ical-generator";
 import React, { useContext } from "react";
 import { ServiceContext } from "../../context";
 import { IFilter } from "../../models/types";
-import styles from "./CustomToolbar.module.scss";
+import styles from "./ExportToolbar.module.scss";
 
-export default function CustomToolbar({ filter }: { filter: IFilter }) {
+export default function ExportToolbar({ filter }: { filter: IFilter }) {
   const { absenceService } = useContext(ServiceContext);
 
   async function exportICal() {
@@ -20,8 +20,8 @@ export default function CustomToolbar({ filter }: { filter: IFilter }) {
         calendar.createEvent({
           start: new Date(absence.startDate),
           end: new Date(absence.endDate),
-          summary: `${absence["user.name"]} - ${absence.type}}`,
-          description: `${absence["user.name"]}, ${absence.type}}, ${absence.admitterNote}}, ${absence.memberNote}}`,
+          summary: `${absence["user.name"]} - ${absence.type}`,
+          description: `${absence["user.name"]} ${absence.type} ${absence.admitterNote} ${absence.memberNote}`,
           url: "https://crewmeister.com/",
         });
       });
