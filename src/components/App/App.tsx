@@ -93,7 +93,7 @@ export default function App() {
 
   function filterChanged(newFilter: Filter) {
     if (!filter.isEqual(newFilter)) {
-      setPage(0);
+      setPage(0); // Go back to page 0 when a new filter is applied.
       setFilter(newFilter);
     }
   }

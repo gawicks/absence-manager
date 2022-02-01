@@ -26,6 +26,7 @@ export default function AbsenceGrid({
   onPageChanged: pageChanged,
   onFilterChanged: filterChanged,
 }: AbsenceGridProps) {
+  //  Use primarily to disable column virtualization for DataGrid in tests. See
   const enableVirtualization = useContext(VirtualizationContext);
 
   return (

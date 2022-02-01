@@ -5,6 +5,7 @@ import absenceReducer from "./reducers";
 
 const store = configureStore({
   reducer: absenceReducer,
+  // Use extraArgument to inject services into thunks.
   middleware: [thunk.withExtraArgument({ absenceService, errorService })],
 });
 

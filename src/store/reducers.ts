@@ -6,6 +6,28 @@ const initialState: State = {
   absences: {},
 };
 
+/**
+ * Absences are sliced up by filters and then by page.
+ * e.g.
+ *   absences: {
+    "": {
+      1 : [{ start: end: ...}, ..., ...],
+      2 : [{ start: end: ...}, ..., ...],
+      3 : [{ start: end: ...}, ..., ...],
+      ...
+    },
+    "type=='vacation": {
+      1 : [{ start: end: ...}, ..., ...],
+      2 : [{ start: end: ...}, ..., ...],
+      ...
+    },
+    "type=='sickness": {
+      1 : [{ start: end: ...}, ..., ...],
+      2 : [{ start: end: ...}, ..., ...],
+      ...
+    }
+  },
+ */
 const absenceReducer = createReducer(initialState, (builder) => {
   builder.addCase(absencesLoaded, (state, action) => {
     const { payload } = action;

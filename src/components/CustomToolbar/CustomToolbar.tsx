@@ -11,8 +11,9 @@ import styles from "./CustomToolbar.module.scss";
 export default function CustomToolbar({ filter }: { filter: IFilter }) {
   const { absenceService } = useContext(ServiceContext);
 
-  async function exportiCal() {
+  async function exportICal() {
     const calendar = ical({ name: "absences" });
+    // Export all absences matching the current filter.
     const [absences] = await absenceService.getAllAbsences(filter);
     if (absences) {
       absences.forEach((absence) => {
@@ -30,7 +31,7 @@ export default function CustomToolbar({ filter }: { filter: IFilter }) {
   return (
     <GridToolbarContainer className={styles.toolbar}>
       <Tooltip title="Export to iCal">
-        <IconButton color="primary" onClick={() => exportiCal()}>
+        <IconButton color="primary" onClick={() => exportICal()}>
           <Download />
         </IconButton>
       </Tooltip>

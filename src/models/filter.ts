@@ -1,6 +1,9 @@
 import { isEqual } from "lodash-es";
 import { IFilter, IFilterValue } from "./types";
 
+/**
+ * Utility class for the Grid Filter.
+ */
 export default class Filter implements IFilter {
   constructor(public value?: IFilterValue) {}
 

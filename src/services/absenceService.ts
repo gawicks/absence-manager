@@ -6,6 +6,10 @@ import {
   IBackend,
 } from "../models/types";
 
+/**
+ * Service which pull absences, user info from backend,
+ * and flattens them into a format consumable by the client.
+ */
 export default class AbsenceService implements IAbsenceService {
   constructor(private backend: IBackend) {}
 

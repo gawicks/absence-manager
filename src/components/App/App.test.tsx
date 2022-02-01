@@ -91,7 +91,7 @@ describe("Absence Page", () => {
     });
     it("Should display absence rows", async () => {
       const rows = screen.getAllByRole("row");
-      expect(rows).toHaveLength(3);
+      expect(rows).toHaveLength(3); // 1 header row + 2 data rows.
     });
     it("Should display admitter notes", async () => {
       expect(screen.getByText("Test note")).toBeInTheDocument();
@@ -100,7 +100,7 @@ describe("Absence Page", () => {
     it("Should display filter options", async () => {
       const menu = container.querySelector(
         "[role=columnheader][data-field=type] [title=Menu]"
-      ) as HTMLElement;
+      ) as HTMLElement; // Not possible to query this element with the screen API.
       fireEvent.click(menu);
       fireEvent.click(screen.getByText("Filter"));
       const select = await screen.findByPlaceholderText("Filter value");
