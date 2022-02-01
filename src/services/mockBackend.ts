@@ -2,8 +2,14 @@ import { IAbsenceResponse, IBackend, IFilterValue } from "../models/types";
 import absences from "./absences.json";
 import members from "./members.json";
 
+/**
+ * Mockback which simulates a real backend.
+ * Supports simulating latency, errors.
+ */
 export default class MockBackend implements IBackend {
-  constructor(private config: { simulatedDelay?: number } = {}) {}
+  constructor(
+    private config: { simulatedLatency?: number; simulateError?: true } = {}
+  ) {}
 
   public getAbsences(
     pageNum: number | undefined,
@@ -11,6 +17,9 @@ export default class MockBackend implements IBackend {
   ): Promise<[IAbsenceResponse[], number]> {
     if (pageNum && pageNum < 0) {
       return Promise.reject(new Error("Invalid page number"));
+    }
+    if (this.config.simulateError) {
+      return Promise.reject(new Error("Unkown error"));
     }
     let { payload }: { payload: IAbsenceResponse[] } = absences;
     // Filter
@@ -24,6 +33,7 @@ export default class MockBackend implements IBackend {
                 const endDate = Date.parse(absence.endDate);
                 const filterDate = Date.parse(item.value);
 
+                // Filter absences filterDate is with range of.
                 return filterDate >= startDate && filterDate <= endDate;
               }
               return true;
@@ -56,9 +66,9 @@ export default class MockBackend implements IBackend {
       return absence;
     });
 
-    if (this.config.simulatedDelay) {
+    if (this.config.simulatedLatency) {
       return new Promise((resolve) => {
-        setTimeout(() => resolve([page, count]), this.config.simulatedDelay);
+        setTimeout(() => resolve([page, count]), this.config.simulatedLatency);
       });
     }
     return Promise.resolve([page, count]);
