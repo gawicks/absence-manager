@@ -81,7 +81,7 @@ describe("Absence Page", () => {
     });
     it("Should display columns", async () => {
       const columns = screen.queryAllByRole("columnheader");
-      expect(columns).toHaveLength(6);
+      expect(columns).toHaveLength(7);
       expect(screen.getByText("Member name")).toBeInTheDocument();
       expect(screen.getByText("Type of absence")).toBeInTheDocument();
       expect(screen.getByText("Period")).toBeInTheDocument();
