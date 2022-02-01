@@ -7,6 +7,7 @@ import fetchAbsences from "../../store/thunks";
 import AbsenceGrid from "../AbsenceGrid";
 import styles from "./App.module.scss";
 import logo from "./logo_crewmeister_white.svg";
+import ImageCell from "../ImageCell/ImageCell";
 
 const columns: GridColDef[] = [
   {
@@ -14,7 +15,18 @@ const columns: GridColDef[] = [
     headerName: "Member name",
     filterable: false,
     width: 150,
+  },
+  {
+    field: "user.image",
+    headerName: "Profile picture",
+    width: 100,
+    renderCell: ({ value }) => (
+      <ImageCell src={value as string} alt="profile picture" />
+    ),
+    align: "center",
     sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
   },
   {
     field: "type",
