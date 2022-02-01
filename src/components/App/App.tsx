@@ -13,6 +13,7 @@ const columns: GridColDef[] = [
   {
     field: "user.name",
     headerName: "Member name",
+    sortable: false,
     filterable: false,
     width: 150,
   },
