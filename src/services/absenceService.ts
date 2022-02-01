@@ -1,5 +1,6 @@
 import Filter from "../models/filter";
 import {
+  AbsenceStatus,
   IAbsence,
   IAbsenceResponse,
   IAbsenceService,
@@ -43,6 +44,14 @@ export default class AbsenceService implements IAbsenceService {
         absence["user.id"] = absence.user.id;
         absence["user.name"] = absence.user.name;
         absence["user.image"] = absence.user.image;
+
+        if (absence.confirmedAt != null) {
+          absence.status = AbsenceStatus.Confirmed;
+        } else if (absence.rejectedAt != null) {
+          absence.status = AbsenceStatus.Rejected;
+        } else {
+          absence.status = AbsenceStatus.Requested;
+        }
       }
       return absence;
     });

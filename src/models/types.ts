@@ -39,9 +39,16 @@ export interface IAbsenceResponse {
 
 export interface IAbsence extends IAbsenceResponse {
   period?: string;
+  status?: AbsenceStatus;
   "user.id"?: number;
   "user.name"?: string;
   "user.image"?: string;
+}
+
+export enum AbsenceStatus {
+  Requested = "Requested",
+  Confirmed = "Confirmed",
+  Rejected = "Rejected",
 }
 
 export interface IBackend {
