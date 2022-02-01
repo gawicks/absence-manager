@@ -61,7 +61,7 @@ describe("Absence Page", () => {
       await setupMocks(mockGetAbsences, mockErrorHandler);
     });
     it("Should display the title", async () => {
-      expect(screen.getByText("Absences")).toBeInTheDocument();
+      expect(screen.getByText("Absence Manager")).toBeInTheDocument();
     });
   });
   describe("Grid", () => {
