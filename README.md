@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="https://crewmeister.com/images/logo_crewmeister_without_text.svg" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 📆 Crewmeister Absence Manager
 
-## Available Scripts
+<p align="center">
+<img src="https://i.ibb.co/R0SKWR8/screenshot.png" alt="screenshot" style="width:550px;"/>
+</p>
 
-In the project directory, you can run:
+## Context
 
-### `npm start`
+At Crewmeister we like to work closely with our clients, listening to their demands and developing solutions for their problems. One of the most requested features is a way for company owners to manage sickness and vacations of employees.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+We decided to implement this feature for our clients and we are calling it the Absence Manager.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Product Requirements
 
-### `npm test`
+- [x] I want to see a list of absences including the names of the employees.
+- [x] I want to see the first 10 absences, with the ability to paginate.
+- [x] I want to see a total number of absences.
+- [x] For each absence I want to see:
+  - [x] Member name
+  - [x] Type of absence
+  - [x] Period
+  - [x] Member note (when available)
+  - [x] Status (can be 'Requested', 'Confirmed' or 'Rejected')
+  - [x] Admitter note (when available)
+- [x] I want to filter absences by type.
+- [x] I want to filter absences by date.
+- [x] I want to see a loading state until the list is available.
+- [x] I want to see an error state if the list is unavailable.
+- [x] I want to see an empty state if there are no results.
+- [x] (Bonus) I can generate an iCal file and import it into outlook.
+- [x] (Bonus) Host the website on the service of your choice (Heroku, AWS, GCloud, ...).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Requirements
 
-### `npm run build`
+- [x] React
+- [x] Tests: Jest + react-testing-library / enzyme
+- [x] Code Linter
+- [x] Redux is a plus.
+- [x] Typescript is a plus.
+- [x] CSSinJS is a plus: styled-components, styled-system, ... (Personally I perfer CSS Modules)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Give it to me faster!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+https://crewmeister-absences.herokuapp.com/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚒️ Help me build the project
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Install Node 14 or later. npm 6 or later.
+2. Clone this repository.
+3. Run `npm install` to install dependencies.
+4. Run `npm start` to start the dev server.
+5. Open http://localhost:3000 in any modern browser.
