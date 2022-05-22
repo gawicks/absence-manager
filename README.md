@@ -2,7 +2,7 @@
   <img src="https://crewmeister.com/images/logo_crewmeister_without_text.svg" />
 </p>
 
-# 📆 Crewmeister Absence Manager
+# 📆 Absence Manager
 
 <p align="center">
 <img src="https://i.ibb.co/R0SKWR8/screenshot.png" alt="screenshot" style="width:550px;"/>
