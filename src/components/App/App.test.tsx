@@ -16,7 +16,7 @@ import App from "./App";
 import { VirtualizationContext, ServiceContext } from "../../context";
 import { IAbsenceResponse } from "../../models/types";
 import AbsenceService from "../../services/absenceService";
-import absenceReducer from "../../store/reducers";
+import { absencesSlice } from "../../store/store";
 
 async function setupMocks(
   mockGetAbsences: () => Promise<[IAbsenceResponse[], number]>,
@@ -32,7 +32,7 @@ async function setupMocks(
   const services = { absenceService, errorService };
 
   const store = configureStore({
-    reducer: absenceReducer,
+    reducer: absencesSlice.reducer,
     middleware: [thunk.withExtraArgument({ absenceService, errorService })],
   });
 

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
-import store from "./store/store";
+import { store } from "./store/store";
 import { absenceService, errorService } from "./services/serviceProviders";
 import { ServiceContext } from "./context";
 

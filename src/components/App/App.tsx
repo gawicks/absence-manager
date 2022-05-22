@@ -3,7 +3,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import Filter from "../../models/filter";
 import { State } from "../../store/types";
-import fetchAbsences from "../../store/thunks";
+import { fetchAbsences } from "../../store/store";
 import AbsenceGrid from "../AbsenceGrid";
 import styles from "./App.module.scss";
 import logo from "./logo_crewmeister_white.svg";
@@ -73,21 +73,21 @@ export default function App() {
 
   const absences = useSelector((state: State) => {
     const filterKey = filter.key;
-    return state.absences[filterKey]?.[page]?.data;
+    return state.absences?.[filterKey]?.[page]?.data;
   });
   const rowCount = useSelector((state: State) => {
     const filterKey = filter.key;
-    return state.absences[filterKey]?.count;
+    return state.absences?.[filterKey]?.count;
   });
   const hasError = useSelector((state: State) => {
     const filterKey = filter.key;
-    return state.absences[filterKey]?.[page]?.hasError;
+    return state.absences?.[filterKey]?.[page]?.hasError;
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAbsences(page, filter));
+    dispatch(fetchAbsences({ page, filter }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, filter]);
 
